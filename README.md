@@ -12,5 +12,13 @@
 $ git clone https://github.com/Jim-Lin/like-polly.git
 $ cd like-polly
 $ activator run
+
+...
+
+--- (Running the application, auto-reloading is enabled) ---
+
+[info] p.c.s.NettyServer - Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+(Server started, use Ctrl+D to stop and go back to the console...)
 ```
 in your browser go to http://localhost:9000
