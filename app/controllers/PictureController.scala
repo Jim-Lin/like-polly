@@ -4,10 +4,10 @@ import java.io.File
 import javax.inject._
 
 import play.api.mvc._
-import services.TCropped
+import services.{TCroppedDetection, TFaceRecognition}
 
 @Singleton
-class PictureController @Inject() (cropped: TCropped) extends Controller {
+class PictureController @Inject() (croppedDetection: TCroppedDetection, faceRecognition: TFaceRecognition) extends Controller {
 
   def upload = Action(parse.multipartFormData) { request =>
     request.body.file("file").map { picture =>
@@ -18,7 +18,8 @@ class PictureController @Inject() (cropped: TCropped) extends Controller {
       def srcFile = new File(s"/tmp/$srcFilename")
       def destFile = new File(s"/tmp/$destFilename")
       picture.ref.moveTo(srcFile)
-      cropped.run(srcFile.getPath, destFile.getPath)
+//      croppedDetection.run(srcFile.getPath, destFile.getPath)
+      faceRecognition.run("")
       Ok("File uploaded")
     }.getOrElse {
       Redirect(routes.HomeController.index()).flashing(

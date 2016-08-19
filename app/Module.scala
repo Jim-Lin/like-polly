@@ -24,7 +24,8 @@ class Module extends AbstractModule {
     // Set AtomicCounter as the implementation for Counter.
     bind(classOf[Counter]).to(classOf[AtomicCounter])
 
-    bind(classOf[TCropped]).to(classOf[Cropped])
+    bind(classOf[TCroppedDetection]).to(classOf[CroppedDetection])
+    bind(classOf[TFaceRecognition]).to(classOf[FaceRecognition])
   }
 
 }

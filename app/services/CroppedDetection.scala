@@ -7,12 +7,12 @@ import org.bytedeco.javacpp.opencv_core._
 import org.bytedeco.javacpp.opencv_imgcodecs._
 import org.bytedeco.javacpp.opencv_objdetect._
 
-trait TCropped {
+trait TCroppedDetection {
   def run(srcPath: String, destPath: String)
 }
 
 @Singleton
-class Cropped extends TCropped {
+class CroppedDetection extends TCroppedDetection {
 
   final val XML_FILE = getClass.getResource("/haarcascade_frontalface_default.xml")
 
@@ -37,10 +37,10 @@ class Cropped extends TCropped {
     cvClearMemStorage(storage)
     def cascade: CvHaarClassifierCascade = new CvHaarClassifierCascade(cvLoad(XML_FILE.getPath))
     val cvSeq: CvSeq = cvHaarDetectObjects(img, cascade, storage, 1.1, 3, CV_HAAR_DO_CANNY_PRUNING, null, null)
-    biggestRect(cvSeq)
+    getBiggestRect(cvSeq)
   }
 
-  private def biggestRect(faces: CvSeq): CvRect = {
+  private def getBiggestRect(faces: CvSeq): CvRect = {
     if (faces.sizeof() == 0) {
       return null
     }
