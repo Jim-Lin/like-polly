@@ -18,8 +18,8 @@ class PictureController @Inject() (croppedDetection: TCroppedDetection, faceReco
       def srcFile = new File(s"/tmp/$srcFilename")
       def destFile = new File(s"/tmp/$destFilename")
       picture.ref.moveTo(srcFile)
-//      croppedDetection.run(srcFile.getPath, destFile.getPath)
-      faceRecognition.run("")
+      croppedDetection.run(srcFile.getAbsolutePath, destFile.getAbsolutePath)
+      faceRecognition.run(destFile.getAbsolutePath)
       Ok("File uploaded")
     }.getOrElse {
       Redirect(routes.HomeController.index()).flashing(
